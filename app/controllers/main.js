@@ -11,3 +11,7 @@ module.exports.transactions = function(req, res){
 module.exports.reports = function(req, res){
 	res.render('reports', { title: 'Express' });
 };
+
+module.exports.newTra = function(req, res){
+	res.render('newTransaction', { title: 'Express' });
+};

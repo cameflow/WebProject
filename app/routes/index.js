@@ -6,6 +6,7 @@ var controller = require('../controllers/main');
 router.get('/', controller.index);
 router.get('/accounts', controller.accounts);
 router.get('/transactions', controller.transactions);
+router.get('/newTransaction', controller.newTra);
 router.get('/reports', controller.reports);
 
 module.exports = router;
