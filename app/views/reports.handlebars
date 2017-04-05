@@ -3,88 +3,31 @@
   <li role="presentation"><a href="/transactions">Transactions</a></li>
   <li role="presentation" class="active"><a href="/reports">Reports</a></li>
 </ul>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card ">
-                <div class="card-header">
-                    <h3>Pie Series</h3>
-                </div>
-                <div class="card-block">
-                    <div id="chart1"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card ">
-                <div class="card-header">
-                    <h3>Pie Customized Series</h3>
-                </div>
-                <div id="chart2" class="card-block">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div id="piechart"></div>
 
-<!-- you need to include the shieldui css and js assets in order for the grids to work -->
-<link rel="stylesheet" type="text/css" href="http://www.prepbootstrap.com/Content/shieldui-lite/dist/css/light/all.min.css" />
-<script type="text/javascript" src="http://www.prepbootstrap.com/Content/shieldui-lite/dist/js/shieldui-lite-all.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script type="text/javascript">
-    jQuery(function ($) {
-        var data1 = [12, 3, 4, 2];
-        var data2 = [3, 9, 12, 14];
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
-        $(function () {
-            $("#chart1").shieldChart({
-                exportOptions: {
-                    image: false,
-                    print: false
-                },
-                axisY: {
-                    title: {
-                        text: "Break-Down for selected quarter"
-                    }
-                },
-                dataSeries: [{
-                    seriesType: "pie",
-                    enablePointSelection: true,
-                    data: data1
-                }]
-            });
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Cama', 8],
+  ['Gym', 2],
+  ['Carro', 4],
+  ['Cocina', 2],
+  ['Tec', 8]
+]);
 
-            $("#chart2").shieldChart({
-                exportOptions: {
-                    image: false,
-                    print: false
-                },
-                seriesSettings: {
-                    pie: {
-                        enablePointSelection: true,
-                        borderColor: 'black',
-                        borderWidth: 3,
-                        dataPointText:
-                            {
-                                style: {
-                                    fontWeight: 'bold'
-                            }
-                        }
-                    }
-                },
-                axisY: {
-                    title: {
-                        text: "Break-Down for selected quarter"
-                    }
-                },
-                dataSeries: [{
-                    seriesType: "pie",
-                    data: data2
-                }]
-            });
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Donde me vale más gráficas computacionales', 'width':550, 'height':400};
 
-
-        });
-
-    });
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
 </script>
